@@ -10,6 +10,7 @@ public class Pawn extends Piece {
     public final String name = "P";
     public PlayerColor playerColor;
     public final PieceType pieceType = PieceType.PAWN;
+    public boolean eligibleForEnPassant = false;
 
     public Pawn(PlayerColor playerColor) {
         this.playerColor = playerColor;
@@ -29,7 +30,6 @@ public class Pawn extends Piece {
 
     @Override
     public Set<BoardPosition> possibleMoves(Board board, BoardPosition start) {
-        // TODO: En Passant and two step on initial move.
         Set<BoardPosition> possibleMoveSet = new HashSet<>();
         int direction = 0;
 
@@ -52,9 +52,25 @@ public class Pawn extends Piece {
                 Piece pieceAtNewBoardPosition = board.pieceAt(newBoardPosition);
 
                 // if there aren't any pieces to take or the pawn is blocked by an opponent's piece
-                if (i != 0 && pieceAtNewBoardPosition.getPlayerColor() != opp
-                        || (i==0 && pieceAtNewBoardPosition.getPlayerColor() == opp)) {
+                if (i==0 && pieceAtNewBoardPosition.getPlayerColor() != PlayerColor.EMPTY) {
                     continue;
+                }
+
+                if (i != 0) {
+                    String boardKey = BoardPosition.asBoardKey(start.getRank() - 1, file + i);
+                    System.out.println(boardKey);
+                    if (board.pieceAt(board.getBoardPosition(boardKey)).getPieceType() == PieceType.PAWN) {
+                        System.out.println("first if");
+                        Piece p = board.pieceAt(board.getBoardPosition(boardKey));
+                        Pawn pawn = (Pawn) p;
+                        if (p.getPlayerColor() == opp && pawn.eligibleForEnPassant) {
+                            System.out.println("second if");
+
+                            possibleMoveSet.add(newBoardPosition);
+                        }
+                    } else if (pieceAtNewBoardPosition.getPlayerColor() != opp) {
+                        continue;
+                    }
                 }
 
                 possibleMoveSet.add(newBoardPosition);

@@ -49,4 +49,8 @@ public class BoardPosition {
     public static String asBoardKey(int rank, int file) {
         return String.format("%s%d", convertValueToFile(file), rank + 1);
     }
+
+    public static int fileDistance(BoardPosition a, BoardPosition b) {
+        return Math.abs(a.fileOffset - b.fileOffset);
+    }
 }

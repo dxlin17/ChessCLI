@@ -15,13 +15,32 @@ public class Game {
     public Player turn;
     public Player white;
     public Player black;
+    public Player player1;
 
+    // TODO create additional constructor for player to specify color
     public Game() {
+        this.black = new Player(PlayerColor.BLACK);
+        this.white = new Player(PlayerColor.WHITE);
+        this.turn = white;
+        player1 = this.white;
+        this.board = new Board();
+        board.setupBoard();
+    }
+
+    public Game(String playerColor) {
         this.board = new Board();
         board.setupBoard();
         this.black = new Player(PlayerColor.BLACK);
         this.white = new Player(PlayerColor.WHITE);
         this.turn = white;
+        switch (playerColor) {
+            case "w" -> player1 = this.white;
+            case "b" -> player1 = this.black;
+            default -> {
+                System.out.println("Invalid option entered. Playing as White");
+                player1 = this.white;
+            }
+        }
     }
 
     @VisibleForTesting
@@ -78,6 +97,15 @@ public class Game {
 
         if (!piece.possibleMoves(board, start).contains(end)) return;
 
+        for (BoardPosition bp : board.boardPositions.values()) {
+            Piece p = board.pieceAt(bp);
+            if (p.getPlayerColor() == turn.playerColor && p.getPieceType() == PieceType.PAWN) {
+                // All pawns are no longer eligible for en passant
+                Pawn pawn = (Pawn) p;
+                pawn.eligibleForEnPassant = false;
+            }
+        }
+
         if (Game.isLegalMove(board, start, end, turn.playerColor)) {
             if (piece.getPieceType() == PieceType.KING && isCastle(start, end, board)) {
                 King king = (King) piece;
@@ -92,6 +120,12 @@ public class Game {
                     board.placePiece(kingRook, rookQ);
                     board.placePiece(new Empty(), board.getBoardPosition(king.kingsideRook));
                 }
+            }
+
+            if (piece.getPieceType() == PieceType.PAWN) {
+                // If the piece moved was a pawn, 2 spaces. Technically the "hasMoved" check is redundant, but doesn't hurt
+                Pawn pawn = (Pawn) piece;
+                pawn.eligibleForEnPassant = BoardPosition.fileDistance(start, end) == 2 && !piece.hasMoved;
             }
 
             board.placePiece(piece, end);

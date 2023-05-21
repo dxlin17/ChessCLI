@@ -34,4 +34,23 @@ public class PawnTest {
         expectedLegalMoves.add(enemyBoardPosition);
         Assert.assertEquals(expectedLegalMoves, possibleMoves);
     }
+
+    @Test
+    public void testEnPassant() {
+        Pawn pawn = new Pawn(PlayerColor.WHITE);
+        pawn.hasMoved = true;
+        Board board = new Board();
+        BoardPosition start = board.getBoardPosition("D5");
+        board.placePiece(pawn, start);
+
+        Pawn enemyPawn = new Pawn(PlayerColor.BLACK);
+        enemyPawn.hasMoved = true;
+        BoardPosition enemyBoardPosition = board.getBoardPosition("E5");
+        board.placePiece(enemyPawn, enemyBoardPosition);
+        enemyPawn.eligibleForEnPassant = true;
+
+        System.out.println(board);
+        System.out.println(pawn.possibleMoves(board, start));
+        Assert.assertTrue(pawn.possibleMoves(board, start).contains(board.getBoardPosition("E6")));
+    }
 }

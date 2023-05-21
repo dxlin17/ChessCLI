@@ -11,6 +11,7 @@ import chess.game.pieces.PieceType;
 import chess.game.pieces.PlayerColor;
 import chess.game.pieces.Queen;
 import chess.game.pieces.Rook;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 
 import java.util.HashMap;
@@ -26,8 +27,14 @@ public class Board {
 
     public BoardPosition whiteKingPosition;
     public BoardPosition blackKingPosition;
+    public PlayerColor player1;
 
+    @VisibleForTesting
     public Board() {
+        this(PlayerColor.WHITE);
+    }
+
+    public Board(PlayerColor player1) {
         boardState = new Piece[BOARD_SIZE][BOARD_SIZE];
         boardPositions = new HashMap<>();
         for (int i=0; i<BOARD_SIZE; i++) {
@@ -39,6 +46,7 @@ public class Board {
                 boardPositions.put(bpKey, new BoardPosition(file, rank));
             }
         }
+        this.player1 = player1;
     }
 
     public Board(Board board) {
@@ -156,6 +164,7 @@ public class Board {
 
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalDivider);
+
         for (int i=0; i<BOARD_SIZE; i++) {
             sb.append(String.format("%d|", BOARD_SIZE - i));
             for (int j=0; j<BOARD_SIZE; j++) {
