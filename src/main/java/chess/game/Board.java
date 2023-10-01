@@ -160,7 +160,7 @@ public class Board {
     }
 
     public String toString() {
-        final String horizontalDivider = "  - - - - - - - - \n";
+        final String horizontalDivider = "  -- -- -- -- -- -- -- -- \n";
 
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalDivider);
@@ -175,7 +175,7 @@ public class Board {
             sb.append(horizontalDivider);
         }
 
-        sb.append("  A B C D E F G H ");
+        sb.append("   A  B  C  D  E  F  G  H ");
 
         return sb.toString();
     }

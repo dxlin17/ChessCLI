@@ -10,8 +10,8 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GameTests {
     Board board;
@@ -102,7 +102,7 @@ public class GameTests {
         Rook rook = new Rook(PlayerColor.WHITE);
         BoardPosition rookBp = board.getBoardPosition("E8");
         board.placePiece(rook, rookBp);
-        Assert.assertTrue(board.isCheck(PlayerColor.BLACK));
+        assertTrue(board.isCheck(PlayerColor.BLACK));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class GameTests {
         BoardPosition enemyRookBp = board.getBoardPosition("E2");
         board.placePiece(enemyRook, enemyRookBp);
 
-        Assert.assertFalse(Game.isLegalMove(g.board, board.getBoardPosition("E7"), board.getBoardPosition("D7"), PlayerColor.BLACK));
+        assertFalse(Game.isLegalMove(g.board, board.getBoardPosition("E7"), board.getBoardPosition("D7"), PlayerColor.BLACK));
     }
 
     @Test
@@ -134,8 +134,8 @@ public class GameTests {
         board.placePiece(queen, board.getBoardPosition("A8"));
         board.placePiece(rook, board.getBoardPosition("A7"));
         board.placePiece(king, board.getBoardPosition("H8"));
-        Assert.assertTrue(board.isCheck(PlayerColor.WHITE));
-        Assert.assertTrue(Game.isCheckmate(board, PlayerColor.WHITE));
+        assertTrue(board.isCheck(PlayerColor.WHITE));
+        assertTrue(Game.isCheckmate(board, PlayerColor.WHITE));
     }
 
     @Test
@@ -146,6 +146,6 @@ public class GameTests {
         Board board = new Board();
         board.placePiece(queen, board.getBoardPosition("A8"));
         board.placePiece(king, board.getBoardPosition("H8"));
-        Assert.assertFalse(Game.isCheckmate(board, PlayerColor.WHITE));
+        assertFalse(Game.isCheckmate(board, PlayerColor.WHITE));
     }
 }

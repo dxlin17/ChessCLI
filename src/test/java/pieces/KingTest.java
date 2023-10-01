@@ -1,3 +1,5 @@
+package pieces;
+
 import chess.game.Board;
 import chess.game.BoardPosition;
 import chess.game.Game;
@@ -44,7 +46,6 @@ public class KingTest {
         Game game = new Game();
         game.board = board;
         game.movePiece(board.getBoardPosition("E1"), board.getBoardPosition("C1"));
-        System.out.println(board);
     }
 
     @Test
@@ -72,7 +73,6 @@ public class KingTest {
         Game game = new Game();
         game.board = board;
         game.movePiece(board.getBoardPosition("E1"), board.getBoardPosition("G1"));
-        System.out.println(board);
     }
 
     @Test

@@ -44,13 +44,10 @@ public class Pawn extends Piece {
 
                 if (i != 0) {
                     String boardKey = BoardPosition.asBoardKey(start.getRank() - 1, file + i);
-                    System.out.println(boardKey);
                     if (board.pieceAt(board.getBoardPosition(boardKey)).getPieceType() == PieceType.PAWN) {
-                        System.out.println("first if");
                         Piece p = board.pieceAt(board.getBoardPosition(boardKey));
                         Pawn pawn = (Pawn) p;
                         if (p.getColor() == opp && pawn.eligibleForEnPassant) {
-                            System.out.println("second if");
 
                             possibleMoveSet.add(newBoardPosition);
                         }

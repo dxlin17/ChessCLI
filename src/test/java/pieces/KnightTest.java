@@ -1,3 +1,5 @@
+package pieces;
+
 import chess.game.Board;
 import chess.game.BoardPosition;
 import chess.game.pieces.Knight;

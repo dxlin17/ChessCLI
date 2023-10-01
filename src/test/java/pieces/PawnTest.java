@@ -1,3 +1,5 @@
+package pieces;
+
 import chess.game.Board;
 import chess.game.BoardPosition;
 import chess.game.pieces.Pawn;
@@ -49,8 +51,6 @@ public class PawnTest {
         board.placePiece(enemyPawn, enemyBoardPosition);
         enemyPawn.eligibleForEnPassant = true;
 
-        System.out.println(board);
-        System.out.println(pawn.possibleMoves(board, start));
         Assert.assertTrue(pawn.possibleMoves(board, start).contains(board.getBoardPosition("E6")));
     }
 }

@@ -186,8 +186,6 @@ public class Game {
                 possibleMoves.removeIf(move -> !isLegalMove(board, bp, move, playerColor));
 
                 if(board.pieceAt(bp).getColor() == playerColor && possibleMoves.size() > 0) {
-                    System.out.println(board.pieceAt(bp));
-                    System.out.println(possibleMoves);
                     return false;
                 }
             }

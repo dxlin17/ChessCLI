@@ -26,5 +26,6 @@ public class BoardTests {
 
         Assert.assertEquals(8, bp.getRank());
         Assert.assertEquals("G", bp.getFile());
+        System.out.println(board);
     }
 }

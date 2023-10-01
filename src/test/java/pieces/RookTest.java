@@ -1,3 +1,5 @@
+package pieces;
+
 import chess.game.Board;
 import chess.game.BoardPosition;
 import chess.game.Game;
@@ -7,7 +9,7 @@ import chess.game.pieces.PieceUtils;
 import chess.game.pieces.PlayerColor;
 import chess.game.pieces.Rook;
 import org.junit.Assert;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.Set;
 import java.util.stream.Collectors;
