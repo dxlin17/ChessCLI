@@ -65,7 +65,7 @@ public class GameTests {
         BoardPosition rookBp = g.board.getBoardPosition("H1");
         Piece rook = g.board.pieceAt(rookBp);
         assertThat(rook, is(instanceOf(Rook.class)));
-        assertThat(rook.getPlayerColor(), is(PlayerColor.WHITE));
+        assertThat(rook.getColor(), is(PlayerColor.WHITE));
 
         Set<BoardPosition> possibleMoves = rook.possibleMoves(g.board, rookBp);
         assertThat(possibleMoves.size(), is(0));
@@ -82,7 +82,7 @@ public class GameTests {
         BoardPosition bishopBp = g.board.getBoardPosition("F1");
         Piece bishop = g.board.pieceAt(bishopBp);
         assertThat(bishop, is(instanceOf(Bishop.class)));
-        assertThat(bishop.getPlayerColor(), is(PlayerColor.WHITE));
+        assertThat(bishop.getColor(), is(PlayerColor.WHITE));
 
         Set<BoardPosition> possibleMoves = bishop.possibleMoves(g.board, bishopBp);
         assertThat(possibleMoves.size(), is(0));

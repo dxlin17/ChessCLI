@@ -99,7 +99,7 @@ public class Game {
 
         for (BoardPosition bp : board.boardPositions.values()) {
             Piece p = board.pieceAt(bp);
-            if (p.getPlayerColor() == turn.playerColor && p.getPieceType() == PieceType.PAWN) {
+            if (p.getColor() == turn.playerColor && p.getPieceType() == PieceType.PAWN) {
                 // All pawns are no longer eligible for en passant
                 Pawn pawn = (Pawn) p;
                 pawn.eligibleForEnPassant = false;
@@ -153,7 +153,7 @@ public class Game {
      */
     public static boolean isLegalMove(Board board, BoardPosition start, BoardPosition end, PlayerColor playerColor) {
         Piece piece = board.pieceAt(start);
-        if (piece.getPlayerColor() != playerColor || !isValidBoardPosition(board, end, playerColor)) return false;
+        if (piece.getColor() != playerColor || !isValidBoardPosition(board, end, playerColor)) return false;
 
         // not legal to put own king in check
         Board boardCopy = new Board(board);
@@ -169,7 +169,7 @@ public class Game {
 
     public static boolean isValidBoardPosition(Board board, BoardPosition end, PlayerColor playerColor) {
         Piece endLocation = board.pieceAt(end);
-        return endLocation.getPlayerColor() != playerColor;
+        return endLocation.getColor() != playerColor;
     }
 
     public static boolean isCheckmate(Board board, PlayerColor playerColor) {
@@ -185,7 +185,7 @@ public class Game {
 
                 possibleMoves.removeIf(move -> !isLegalMove(board, bp, move, playerColor));
 
-                if(board.pieceAt(bp).getPlayerColor() == playerColor && possibleMoves.size() > 0) {
+                if(board.pieceAt(bp).getColor() == playerColor && possibleMoves.size() > 0) {
                     System.out.println(board.pieceAt(bp));
                     System.out.println(possibleMoves);
                     return false;

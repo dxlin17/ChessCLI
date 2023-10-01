@@ -6,24 +6,8 @@ import chess.game.BoardPosition;
 import java.util.Set;
 
 public class Queen extends Piece {
-    public PlayerColor playerColor;
-    public final String name = "Q";
-    public final PieceType pieceType = PieceType.QUEEN;
-
     public Queen(PlayerColor playerColor) {
-        this.playerColor = playerColor;
-    }
-
-    public String toString() {
-        return name;
-    }
-    @Override
-    public PieceType getPieceType() {
-        return pieceType;
-    }
-    @Override
-    public PlayerColor getPlayerColor() {
-        return playerColor;
+        super("Q", playerColor, PieceType.QUEEN);
     }
 
     @Override

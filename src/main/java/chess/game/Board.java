@@ -70,7 +70,7 @@ public class Board {
 
         boardState[rank][bp.fileOffset] = piece;
         if (piece.getPieceType() == KING) {
-            if (piece.getPlayerColor() == PlayerColor.WHITE) {
+            if (piece.getColor() == PlayerColor.WHITE) {
                 whiteKingPosition = bp;
             } else {
                 blackKingPosition = bp;
@@ -118,7 +118,7 @@ public class Board {
         Piece pieceAtBoardPosition = pieceAt(boardPosition);
         boolean isOnBoard = rank >= 1 && rank <= BOARD_SIZE && file >= 0 && file < BOARD_SIZE;
 
-        return isOnBoard && pieceAtBoardPosition.getPlayerColor() != currPiecePlayerColor;
+        return isOnBoard && pieceAtBoardPosition.getColor() != currPiecePlayerColor;
     }
 
     public static Piece[][] makeDeepCopy(Board board) {
@@ -133,7 +133,7 @@ public class Board {
         for (int rank=1; rank<=BOARD_SIZE; rank++) {
             for(int fileOffset=0; fileOffset<BOARD_SIZE; fileOffset++) {
                 BoardPosition bp = getBoardPosition(BoardPosition.asBoardKey(rank, fileOffset));
-                if (isValidBoardPosition(bp, playerColor) && pieceAt(bp).getPlayerColor() == opp) {
+                if (isValidBoardPosition(bp, playerColor) && pieceAt(bp).getColor() == opp) {
                     if (pieceAt(bp).possibleMoves(this, bp).contains(kingPos)) {
                         return true;
                     }
@@ -150,7 +150,7 @@ public class Board {
         for (int rank=0; rank<BOARD_SIZE; rank++) {
             for(int fileOffset=0; fileOffset<BOARD_SIZE; fileOffset++) {
                 BoardPosition bp = getBoardPosition(BoardPosition.asBoardKey(rank, fileOffset));
-                if (pieceAt(bp).getPlayerColor() == playerColor) {
+                if (pieceAt(bp).getColor() == playerColor) {
                     possibleMovesByAllPieces.addAll(pieceAt(bp).possibleMoves(this, bp));
                 }
             }

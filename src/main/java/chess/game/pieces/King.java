@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class King extends Piece {
-    public final String name = "K";
-    public PlayerColor playerColor;
-    public final PieceType pieceType = PieceType.KING;
     public boolean hasMoved = false;
     public String queensideRook;
     public String kingsideRook;
@@ -19,7 +16,7 @@ public class King extends Piece {
     public String[] kingsideCastle;
 
     public King(PlayerColor playerColor) {
-        this.playerColor = playerColor;
+        super("K", playerColor, PieceType.KING);
         if (playerColor == PlayerColor.WHITE) {
             queensideRook = "A1";
             kingsideRook = "H1";
@@ -31,16 +28,6 @@ public class King extends Piece {
             queensideCastle = new String[]{"C8", "D8"};
             kingsideCastle = new String[]{"G8", "F8"};
         }
-    }
-
-    @Override
-    public PieceType getPieceType() {
-        return pieceType;
-    }
-
-    @Override
-    public PlayerColor getPlayerColor() {
-        return playerColor;
     }
 
     @Override
@@ -71,6 +58,7 @@ public class King extends Piece {
     }
 
     public boolean canCastle(BoardPosition kingBp, BoardPosition rookBp, Board board) {
+        PlayerColor playerColor = getColor();
         PlayerColor opp = PieceUtils.getOppositePlayerColor(playerColor);
         if (!(hasMoved || board.isCheck(playerColor))) {
             Piece piece = board.pieceAt(rookBp);
@@ -92,9 +80,5 @@ public class King extends Piece {
         }
 
         return false;
-    }
-
-    public String toString() {
-        return name;
     }
 }

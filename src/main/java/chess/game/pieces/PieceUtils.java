@@ -31,7 +31,7 @@ public class PieceUtils {
 
     static Set<BoardPosition> possibleStraightMovesWithDistance(Board board, BoardPosition start, int maxMoveDistance) {
         Piece piece = board.pieceAt(start);
-        PlayerColor opp = getOppositePlayerColor(piece.getPlayerColor());
+        PlayerColor opp = getOppositePlayerColor(piece.getColor());
         int rank = start.getRank();
         String file = start.getFile();
         int fileOffset = BoardPosition.convertFileToValue(file);
@@ -39,9 +39,9 @@ public class PieceUtils {
 
         for (int i=rank+1; i<=rank + maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(i, file));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
@@ -49,10 +49,10 @@ public class PieceUtils {
 
         for (int i=rank-1; i >= rank - maxMoveDistance; i--) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(i, file));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
@@ -60,10 +60,10 @@ public class PieceUtils {
 
         for (int i=fileOffset+1; i<=fileOffset + maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank, BoardPosition.convertValueToFile(i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
@@ -71,10 +71,10 @@ public class PieceUtils {
 
         for (int i=fileOffset-1; i >=fileOffset - maxMoveDistance; i--) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank, BoardPosition.convertValueToFile(i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
@@ -93,7 +93,7 @@ public class PieceUtils {
 
     static Set<BoardPosition> possibleDiagonalMovesWithDistance(Board board, BoardPosition start, int maxMoveDistance) {
         Piece piece = board.pieceAt(start);
-        PlayerColor opp = getOppositePlayerColor(piece.getPlayerColor());
+        PlayerColor opp = getOppositePlayerColor(piece.getColor());
         int rank = start.getRank();
         String file = start.getFile();
         int fileOffset = BoardPosition.convertFileToValue(file);
@@ -102,10 +102,10 @@ public class PieceUtils {
 
         for (int i=1; i<maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank + i, BoardPosition.convertValueToFile(fileOffset + i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
@@ -113,30 +113,30 @@ public class PieceUtils {
 
         for (int i=1; i<maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank - i, BoardPosition.convertValueToFile(fileOffset + i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
         }
         for (int i=1; i<maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank + i, BoardPosition.convertValueToFile(fileOffset - i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
         }
         for (int i=1; i<maxMoveDistance; i++) {
             BoardPosition possibleBoardPosition = board.getBoardPosition(boardPositionKey(rank - i, BoardPosition.convertValueToFile(fileOffset - i)));
-            if (board.isValidBoardPosition(possibleBoardPosition, piece.getPlayerColor())) {
+            if (board.isValidBoardPosition(possibleBoardPosition, piece.getColor())) {
                 validMoves.add(possibleBoardPosition);
 
-                if (board.pieceAt(possibleBoardPosition).getPlayerColor() == opp) break;
+                if (board.pieceAt(possibleBoardPosition).getColor() == opp) break;
             } else {
                 break;
             }
